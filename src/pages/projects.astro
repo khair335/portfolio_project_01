@@ -1,0 +1,233 @@
+---
+import project1 from '../assets/project1.jpeg';
+import project2 from '../assets/project2.jpeg';
+import jsImg from '../assets/js.png';
+import reactImg from '../assets/react.png';
+import '../styles/global.css';
+
+import IconCollection from '../IconCollection/IconCollection.astro';
+import Navbar from '../conponent/Navbar.astro';
+import Footer from '../conponent/Footer.astro';
+import ProjectCard from '../conponent/ProjectCard.astro';
+import AnimatedText from '../conponent/AnimatedText.astro';
+import ProjectCard2 from '../conponent/ProjectCard2.astro';
+
+// Define the number of projects per page
+const projectsPerPage = 6;
+
+// Generate 30 project data
+const projects = Array.from({ length: 30 }, (_, index) => ({
+  image: index % 2 === 0 ? project1 : project2,
+  title: `Project Name ${index + 1}`,
+  description:
+    'Lorem ipsum dolor sit amet consectetur. Posuere iaculis ultrices elementum eget dictum et urna. Molestie tincidunt sem imperdiet adipiscing nunc ac vestibulum.',
+  icons: [
+    { src: reactImg, alt: 'React icon', link: '#' },
+    { src: jsImg, alt: 'JS icon', link: '#' },
+  ],
+  links: [
+    { href: '#', label: 'GitHub' },
+    { href: '#', label: 'Demo' },
+  ],
+}));
+
+// Calculate the total number of pages
+const totalPages = Math.ceil(projects.length / projectsPerPage);
+const serializedProjects = JSON.stringify(projects);
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Projects</title>
+    <link
+      rel='stylesheet'
+      type='text/css'
+      charset='UTF-8'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+    />
+    <link
+      rel='stylesheet'
+      type='text/css'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+    />
+  </head>
+  <body class='bg-stone-950 mx-auto w-full'>
+    <div
+      class='bg-stone-950 px-4 md:px-12 flex justify-center items-center w-full overflow-y-hidden'
+    >
+      <section
+        class='max-w-[673px] lg:max-w-[928px] xxl:max-w-[1344px] w-full mx-auto relative'
+      >
+        <div class='top-bg-section relative z-10'>
+          <Navbar />
+
+          <AnimatedText
+            text='projects_'
+            dataValue='projects_'
+            className='text-white text-[38px] relative z-10 md:text-7xl lg:text-[100px] font-black font-craftworkGrotesk py-10 md:py-20 uppercase leading-[45px] md:leading-[86px] lg:leading-[120px]'
+            style=''
+          />
+          <div
+            id='project-cards'
+            class='flex flex-wrap gap-6 mb-20 relative z-10'
+          >
+            {
+              projects
+                .slice(0, projectsPerPage)
+                .map((project) => (
+                  <ProjectCard projectLength={projects.length} {...project} />
+                ))
+            }
+          </div>
+          <div
+            class='flex justify-center items-center space-x-4 text-white pb-24'
+          >
+            <button
+              id='prev-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+              disabled
+            >
+              <IconCollection
+                icon='arrowLeft'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </button>
+            <div class='flex items-center space-x-2'>
+              <div id='current-page'>1</div>
+              <div>of</div>
+              <div>{totalPages}</div>
+            </div>
+            <button
+              id='next-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+            >
+              <IconCollection
+                icon='arrowRight2'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </button>
+          </div>
+          <Footer />
+        </div>
+      </section>
+    </div>
+    <script>
+      const projects = JSON.parse(`{{serializedProjects}}`);
+      const projectsPerPage = 6;
+      let currentPage = 1;
+
+      const totalPages = Math.ceil(projects.length / projectsPerPage);
+      const projectCards = document.getElementById('project-cards');
+      const prevPageButton = document.getElementById('prev-page');
+      const nextPageButton = document.getElementById('next-page');
+      const currentPageDisplay = document.getElementById('current-page');
+
+      function renderProjects(page) {
+        const startIndex = (page - 1) * projectsPerPage;
+        const endIndex = startIndex + projectsPerPage;
+        projectCards.innerHTML = '';
+        projects.slice(startIndex, endIndex).forEach((project) => {
+          const projectCard = document.createElement('div');
+          projectCard.classList.add(
+            'relative',
+            'max-w-full',
+            'md:max-w-[48%]',
+            'lg:max-w-[400px]',
+            'w-full',
+            'h-[284px]',
+            'rounded-3xl',
+            'group',
+            'overflow-hidden',
+          );
+          projectCard.innerHTML = `
+            <img
+              src="${project.image}"
+              width="400"
+              height="284"
+              decoding="async"
+              loading="lazy"
+              alt="project image"
+              class="relative object-cover rounded-3xl max-w-full md:max-w-[48%] lg:max-w-[400px] w-full h-[284px]"
+            />
+            <div
+              class="max-w-full md:max-w-full lg:max-w-[400px] w-full bottom-0 top-[35%] md:top-[40%] lg:top-[35%] group-hover:top-0 absolute left-0 cursor-pointer right-0 p-6 md:p-3 lg:p-6 hover-transition bg-black/40 rounded-tl-3xl rounded-tr-3xl backdrop-blur-[28px] flex-col justify-start items-start gap-8 inline-flex"
+            >
+              <div class="self-stretch grow shrink basis-0 flex-col justify-start items-start gap-5 flex">
+                <div class="self-stretch text-white text-2xl font-semibold font-craftworkGrotesk leading-7">
+                  ${project.title}
+                </div>
+                <div class="self-stretch text-white/90 text-lg font-normal font-generalSans leading-[27px] line-clamp-3">
+                  ${project.description}
+                </div>
+              </div>
+              <div class="self-stretch justify-between items-center inline-flex">
+                <div class="justify-start items-center gap-4 flex">
+                  ${project.icons
+                    .map(
+                      (icon) => `
+                    <a href="${icon.link}" class="w-12 h-12 relative bg-neutral-800 rounded-xl flex justify-center items-center" aria-label="${icon.alt}">
+                      <img
+                        src="${icon.src}"
+                        width="40"
+                        height="40"
+                        decoding="async"
+                        loading="lazy"
+                        alt="${icon.alt}"
+                        class="relative object-cover rounded-xl"
+                      />
+                    </a>
+                  `,
+                    )
+                    .join('')}
+                </div>
+                <div class="justify-start items-center gap-3 flex">
+                  ${project.links
+                    .map(
+                      (link, index) => `
+                    <div class="px-5 py-3 ${index === 0 ? 'bg-indigo-950' : 'bg-blue-800'} rounded-[20px] justify-start items-center gap-2.5 flex">
+                      <a href="${link.href}" class="text-white/90 text-lg font-light font-generalSans leading-[18px]">
+                        ${link.label}
+                      </a>
+                    </div>
+                  `,
+                    )
+                    .join('')}
+                </div>
+              </div>
+            </div>
+          `;
+          projectCards.appendChild(projectCard);
+        });
+      }
+
+      function updateButtons() {
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = currentPage === totalPages;
+        currentPageDisplay.textContent = currentPage;
+      }
+
+      prevPageButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderProjects(currentPage);
+          updateButtons();
+        }
+      });
+
+      nextPageButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderProjects(currentPage);
+          updateButtons();
+        }
+      });
+
+      renderProjects(currentPage);
+      updateButtons();
+    </script>
+  </body>
+</html>

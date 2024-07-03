@@ -1,0 +1,267 @@
+---
+import { Image } from 'astro:assets';
+import IconCollection from '../IconCollection/IconCollection.astro';
+import AnimatedText from './AnimatedText.astro';
+
+const skillCategories = [
+  {
+    category: 'Digital Forensics',
+    skills: [
+      'Digital Forensics',
+      'Cloud Forensics',
+      'Threat Hunting',
+      'Enterprise IR',
+      'Communication',
+    ],
+  },
+  {
+    category: 'Programming & Development',
+    skills: [
+      'HTML/CSS/Javascript',
+      'AWS',
+      'Python/C++/Jupyter',
+      'Reverse Engineering',
+      'Networking',
+    ],
+  },
+  {
+    category: 'Systems & Networks',
+    skills: ['Bash/Batch', 'Linux', 'Windows AD', 'VSphere/ESXI', 'Docker'],
+  },
+  {
+    category: 'DevSecOps',
+    skills: ['DevSecOps', 'Cyber Tool Dev', 'Azure', 'Git', 'CI/CD Pipelines'],
+  },
+  {
+    category: 'Tools & Technologies',
+    skills: [
+      'Timeline Explorer',
+      'Volatility',
+      'KAPE',
+      'Elastic/ELK (SIEM)',
+      'Endgame/Aurora (EDR)',
+    ],
+  },
+];
+---
+
+<head>
+  <style>
+    .slick-slider {
+      width: 100%;
+      height: 100%;
+    }
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .slick-next:before, .slick-prev:before {
+      opacity: 0 !important;
+    }
+
+      #slideRange {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: #2D2D2D ;
+    outline: none;
+    /* opacity: 0.7; */
+    transition: opacity .2s;
+  }
+
+  #slideRange:hover {
+    opacity: 1;
+  }
+
+  #slideRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 84px;
+    height: 36px;
+    border-radius: 16px;
+    background: #0056b3;
+    cursor: pointer;
+    border: none;
+  }
+
+  #slideRange::-moz-range-thumb {
+    width: 84px;
+    height: 36px;
+    border-radius: 16px;
+    background: #0056b3;
+    cursor: pointer;
+    border: none;
+  }
+
+  #slideRange::-ms-thumb {
+    width: 84px;
+    height: 36px;
+    border-radius: 16px;
+    background: #0056b3;
+    cursor: pointer;
+    border: none;
+  }
+    @media (max-width: 767px) {
+      .slick-slide {
+        padding: 4px;
+      }
+    }
+  </style>
+</head>
+<div>
+
+       <AnimatedText
+          text='Summary_'
+          dataValue='Summary_'
+          className='text-white text-[38px] md:text-7xl lg:text-[100px] font-black font-craftworkGrotesk py-10 md:py-20 uppercase leading-[45px] md:leading-[120px]'
+          style=''
+        />
+
+  <div class='flex flex-col md:flex-row gap-4'>
+    <div class='max-w-[800px] w-full px-8 py-9 bg-white/5 rounded-3xl backdrop-blur-[44px] flex-col justify-start items-start gap-8 inline-flex'>
+      <div class='self-stretch text-white/90 text-lg font-medium font-generalSans leading-7'>
+        Highly experienced Digital Forensics and Incident Response (DFIR) with 8 years of programming, tool development experience, within various cybersecurity domains, with a particular focus against Advanced Persistent Threats (APTs).
+      </div>
+      <div class='self-stretch text-white/90 text-lg font-medium font-generalSans leading-7'>
+        Skilled at performing forensics for large scale intrusions, incident response, detection engineering, cloud forensics, tool development, malware triage and reverse engineering.
+      </div>
+      <div class='self-stretch text-white/90 text-lg font-medium font-generalSans leading-7'>
+        Strong, proven critical thinking leader who challenges root problems and others with innovative and future driven solutions. Bringing forth prior experience and knowledge from working in the Intelligence Community (IC) married with experience from enterprise engagements.
+      </div>
+    </div>
+    <div class='flex flex-col gap-6 max-w-[580px] w-full flex-1'>
+      <div class='w-full h-auto p-8 bg-sky-600/5 rounded-3xl flex-col justify-center items-start gap-5 inline-flex'>
+        <div class='self-stretch text-blue-800 text-2xl font-bold font-craftworkGrotesk leading-7'>
+          Certifications
+        </div>
+        <ul class='self-stretch text-white/90 text-lg font-medium list-disc pl-6 font-generalSans leading-7'>
+          <li class=''>CISSP</li>
+          <li class=''>GCFA, GCED, GCIH</li>
+          <li class=''>COMPTIA Security+</li>
+        </ul>
+      </div>
+      <div class='w-full h-auto p-8 bg-sky-600/5 rounded-3xl flex-col justify-center items-start gap-5 inline-flex'>
+        <div class='self-stretch text-blue-800 text-2xl font-bold font-craftworkGrotesk leading-7'>
+          Certifications
+        </div>
+        <ul class='self-stretch text-white/90 text-lg font-medium list-disc pl-6 font-generalSans leading-7'>
+          <li class=''>CISSP</li>
+          <li class=''>GCFA, GCED, GCIH</li>
+          <li class=''>COMPTIA Security+</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class=''>
+    <div class='hidden lg:flex gap-5 mt-6 mb-10'>
+      {
+        skillCategories.map((category) => (
+          <div class='max-w-[252px] w-full px-6 flex-1 py-10 bg-white/5 rounded-xl border border-white/10 flex-col justify-center items-center gap-8 inline-flex'>
+            {category.skills.map((skill) => (
+              <div style='word-break: break-all;' class='self-stretch text-center break-words text-white/90 text-lg font-normal font-generalSans leading-[18px]'>
+                {skill}
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+     <div class='slider-container summary-slider block lg:hidden mt-6 mb-10'>
+
+
+      <div class='slider-skill'>
+        {
+          skillCategories.map((category, index) => (
+            <div class='slick-slide'>
+              <div class=' w-full h-full px-6 flex-1 py-10 bg-white/5 rounded-xl border border-white/10 flex-col justify-center items-center gap-8 inline-flex'>
+                {category.skills.map((skill) => (
+                  <div style='word-break: break-all;' class='self-stretch text-center break-words text-white/90 text-lg font-normal font-generalSans leading-[18px]'>
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+         <input type="range" class="my-10" id="slideRange" min="0" max="4" value="0">
+    </div>
+    <a href='' class='w-full mb-40 h-24 pl-8 pr-4 py-4 bg-blue-800 rounded-3xl backdrop-blur-[44px] justify-start items-center gap-5 inline-flex'>
+      <div class='grow shrink basis-0 text-white/90 text-[28px] font-bold font-craftworkGrotesk leading-7'>
+        Checkout my projects
+      </div>
+      <IconCollection icon='arrowRight3' className='w-16 h-16' />
+    </a>
+  </div>
+   <script>
+    import 'slick-carousel';
+    import $ from 'jquery';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let updateCount = 0;
+
+      const slickElement = $('.slider-skill').slick({
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3.5,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: false,
+        autoplaySpeed: 2000,
+        responsive: [
+          {
+            breakpoint: 1023,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: false,
+              dots: false,
+            },
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              dots: false,
+              arrows: false,
+              slidesToShow: 1.5,
+              slidesToScroll: 1,
+            },
+          },
+        ],
+      });
+
+      // Update slide index when the slider changes
+      slickElement.on('afterChange', function(event, slick, currentSlide) {
+        updateCount++;
+        $('#updateCount').text(updateCount);
+        $('#slideRange').val(currentSlide);
+      });
+
+      // Go to the slide when the range input changes
+      $('#slideRange').on('input change', function() {
+        const slideIndex = $(this).val();
+        slickElement.slick('slickGoTo', slideIndex);
+      });
+
+      // Automatically navigate to a specific slide when the screen width is less than 767px
+      const goToSlide = () => {
+        if (window.innerWidth < 767) {
+          slickElement.slick('slickGoTo', 0); // Change 0 to the index of the slide you want to navigate to
+        }
+      };
+
+      // Call the function on page load
+      goToSlide();
+
+      // Add a resize event listener to handle window resizing
+      window.addEventListener('resize', goToSlide);
+    });
+  </script>
+</div>

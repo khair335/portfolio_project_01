@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/heroImg.svg';
+import AnimatedText from './AnimatedText.astro';
+---
+
+<!-- Head section -->
+<head>
+  <!-- Include any meta tags, links to stylesheets, or other head elements here -->
+</head>
+
+<!-- Main content -->
+<div class='pt-10 pb-[120px] xxl:pb-[180px] 2xl:pb-[240px] relative z-[2]'>
+  <div
+    class='flex flex-col md:flex-row justify-between items-start gap-3 md:gap-5 lg:gap-8 relative'
+  >
+    <div
+      class='max-w-full md:max-w-[400px] lg:max-w-[438px] xxl:max-w-[695px] w-full p-6 md:p-8 xxl:p-12 bg-white bg-opacity-5 rounded-[32px] backdrop-blur-md flex-col justify-center items-start gap-10 inline-flex'
+    >
+      <div
+        class='self-stretch h-[130px] md:h-[160px] lg:h-[272px] xxl:h-[344px] flex-col justify-start items-start flex'
+      >
+        <AnimatedText
+          text='Hey!'
+          dataValue='Hey!'
+          className='self-stretch text-blue-400 text-[32px] md:text-[40px] lg:text-[56px] xxl:text-7xl font-black font-craftworkGrotesk uppercase leading-[45px] md:leading-10 lg:leading-[67px] xxl:leading-[86px]'
+          style=''
+        />
+        <AnimatedText
+          text='I’m'
+          dataValue='I’m'
+          className='self-stretch text-white text-[32px] md:text-[40px] lg:text-[56px] xxl:text-7xl font-black font-craftworkGrotesk uppercase leading-[45px] md:leading-10 lg:leading-[67px] xxl:leading-[86px]'
+          style=''
+        />
+        <AnimatedText
+          text='Matthew'
+          dataValue='Matthew'
+          className='self-stretch text-white break-words text-[32px] md:text-[40px] lg:text-[56px] xxl:text-7xl font-black font-craftworkGrotesk uppercase leading-[45px] md:leading-10 lg:leading-[67px] xxl:leading-[86px]'
+          style=''
+        />
+        <AnimatedText
+          text='Wise_'
+          dataValue='Wise_'
+          className='self-stretch text-white break-words text-[32px] md:text-[40px] lg:text-[56px] xxl:text-7xl font-black font-craftworkGrotesk uppercase leading-[45px] md:leading-10 lg:leading-[67px] xxl:leading-[86px]'
+          style=''
+        />
+
+
+      </div>
+    </div>
+    <div
+      class='max-w-full md:max-w-[504px] xxl:max-w-[774px] p-6 xxl:p-12 bg-white/opacity-0 rounded-3xl border border-blue-800 backdrop-blur-[28px] flex-col justify-center items-start gap-10 md:hidden inline-flex'
+    >
+      <div
+        class='text-white text-[15px] md:text-lg xxl:text-xl font-normal font-generalSans leading-snug md:leading-[30px]'
+      >
+        I’m highly experienced Digital Forensics and Incident Response (DFIR)
+        with 8 years of programming, tool development experience, within various
+        cybersecurity.
+      </div>
+    </div>
+    <div class='w-full'>
+      <Image
+        src={heroImg}
+        width={617}
+        height={668}
+        decoding='async'
+        loading='lazy'
+        alt='hero image'
+        class='relative z-10 object-cover object-top max-w-full md:max-w-[340px] lg:max-w-[458px] rounded-3xl xxl:max-w-[617px] w-full h-[202px] md:h-[330px] lg:h-[502px] xxl:h-[668px]'
+      />
+    </div>
+    <div
+      class='max-w-[380px] lg:max-w-[504px] xxl:max-w-[774px] h-[90px] lg:h-[138px] xxl:h-[171px] hidden absolute bottom-0 left-0 p-6 lg:p-8 xxl:p-12 bg-white/opacity-0 rounded-3xl border border-blue-800 backdrop-blur-[28px] flex-col justify-center items-start gap-10 md:inline-flex'
+    >
+      <div
+        class='text-white text-sm xxl:text-xl font-normal font-generalSans leading-5 lg:leading-[30px]'
+      >
+        I’m highly experienced Digital Forensics and Incident Response (DFIR)
+        with 8 years of programming, tool development experience, within various
+        cybersecurity.
+      </div>
+    </div>
+  </div>
+
+  <!-- New h1 element with data-value attribute -->
+
+  <!-- New meta-links -->
+  <a
+    id='source-link'
+    class='meta-link'
+    href='https://kprverse.com'
+    target='_blank'
+  >
+    <i class='fa-solid fa-link'></i>
+    <span>Source</span>
+  </a>
+
+  <a
+    id='yt-link'
+    class='meta-link'
+    href='https://youtu.be/W5oawMJaXbU'
+    target='_blank'
+  >
+    <i class='fa-brands fa-youtube'></i>
+    <span>2 min tutorial</span>
+  </a>
+</div>
+
+<!-- CSS Styles -->
+<!-- <style>
+
+
+
+</style> -->

@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+
+const { image, title, description, icons, links, projectLength } = Astro.props;
+---
+
+<div class={`relative p-1 group max-w-full md:max-w-[46%] ${projectLength > 2 ? 'lg:max-w-[400px]' : 'lg:max-w-1/2'} w-full `}>
+  <span class="absolute top-0 right-0 left-0 bottom-0 group-hover:bg-gradient-to-r from-lime-400 to-blue-700 z-[2] rounded-3xl"></span>
+  <div class="rounded-3xl bg-black z-[3] opacity-100  relative h-[284px]">
+    <div
+      class={`relative max-w-full md:max-w-full ${projectLength > 2 ? 'lg:max-w-[400px]' : 'lg:max-w-1/2'} w-full h-[284px] rounded-3xl relative z-[3] overflow-hidden`}
+    >
+      <Image
+        src={image}
+        width={400}
+        height={284}
+        decoding='async'
+        loading='lazy'
+        alt='project image'
+        class={`relative object-cover rounded-3xl max-w-full md:max-w-full ${projectLength > 2 ? 'lg:max-w-[400px]' : 'lg:max-w-full'} w-full h-[284px]`}
+      />
+      <div
+        class={`max-w-full md:max-w-full ${projectLength > 2 ? 'lg:max-w-[400px]' : 'lg:max-w-full'} w-full bottom-0 top-[35%] md:top-[40%] lg:top-[35%] group-hover:top-0 absolute left-0 cursor-pointer right-0 p-6 md:p-3 lg:p-6 hover-transition bg-black/40 rounded-tl-3xl rounded-tr-3xl backdrop-blur-[28px] flex-col justify-start items-start gap-8 inline-flex`}
+      >
+        <div
+          class='self-stretch grow shrink basis-0 flex-col justify-start items-start gap-5 flex'
+        >
+          <div
+            class='self-stretch text-white text-2xl font-semibold font-craftworkGrotesk leading-7'
+          >
+            {title}
+          </div>
+          <div
+            class='self-stretch text-white/90 text-lg font-normal font-generalSans leading-[27px] line-clamp-3'
+          >
+            {description}
+          </div>
+        </div>
+        <div class='self-stretch justify-between items-center inline-flex'>
+          <div class='justify-start items-center gap-4 flex'>
+            {
+              icons.map((icon, index) => (
+                <a
+                  key={index}
+                  href={icon.link}
+                  class='w-12 h-12 relative bg-neutral-800 rounded-xl flex justify-center items-center'
+                  aria-label={icon.alt}
+                >
+                  <Image
+                    src={icon.src}
+                    width={40}
+                    height={40}
+                    decoding='async'
+                    loading='lazy'
+                    alt={icon.alt}
+                    class='relative object-cover rounded-xl'
+                  />
+                </a>
+              ))
+            }
+          </div>
+           <div class='justify-start items-center gap-3 flex'>
+            {
+              links.map((link, index) => (
+                <div
+                  key={index}
+                  class={`px-5 py-3 md:px-3 md:py-2 lg:px-5 lg:py-3 ${index === 0 ? 'bg-indigo-950' : 'bg-blue-800'} rounded-[20px] justify-start items-center gap-2.5 flex`}
+                >
+                  <a
+                    href={link.href}
+                    class='text-white/90 text-lg md:text-base lg:text-lg font-light font-generalSans leading-[18px]'
+                  >
+                    {link.label}
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-transition {
+    transition:
+      top 0.3s ease,
+      background 0.3s ease;
+  }
+  .group:hover .hover-transition {
+    top: 0 !important;
+  }
+</style>

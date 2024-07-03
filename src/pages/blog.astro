@@ -1,0 +1,250 @@
+---
+import project1 from '../assets/project1.jpeg';
+import project2 from '../assets/project2.jpeg';
+import '../styles/global.css';
+
+import IconCollection from '../IconCollection/IconCollection.astro';
+import Navbar from '../conponent/Navbar.astro';
+import BlogCard from '../conponent/BlogCard.astro';
+import Footer from '../conponent/Footer.astro';
+import AnimatedText from '../conponent/AnimatedText.astro';
+
+// Define the number of blog posts per page
+const postsPerPage = 6;
+
+// Generate 30 blog posts data
+const blogData = Array.from({ length: 30 }, (_, index) => ({
+  image: index % 2 === 0 ? project1 : project2,
+  title: `Blog Post Title ${index + 1}`,
+  description: `This is the description for Blog Post Title ${index + 1}.`,
+  view: Math.floor(Math.random() * 2000) + 1, // Random view count between 1 and 2000
+  postTime: Math.floor(Math.random() * 100) + 1, // Random post time in days between 1 and 100
+}));
+
+// Calculate the total number of pages
+const totalPages = Math.ceil(blogData.length / postsPerPage);
+const serializedBlogData = JSON.stringify(blogData);
+
+let searchQuery = '';
+let filteredBlogData = blogData;
+
+const handleSearch = (e) => {
+  searchQuery = e.target.value;
+  filteredBlogData = blogData.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+  currentPage = 1;
+  renderPosts(currentPage, filteredBlogData);
+  updateButtons();
+};
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Blog</title>
+    <link
+      rel='stylesheet'
+      type='text/css'
+      charset='UTF-8'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+    />
+    <link
+      rel='stylesheet'
+      type='text/css'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+    />
+  </head>
+  <body class='mx-auto bg-stone-950 w-full'>
+    <div
+      class='bg-stone-950 px-4 md:px-12 flex justify-center items-center w-full overflow-y-hidden'
+    >
+      <section
+        class='max-w-[673px] lg:max-w-[928px] xxl:max-w-[1344px] w-full mx-auto relative'
+      >
+        <div class='top-bg-section pb-12 relative z-10'>
+          <Navbar />
+
+          <AnimatedText
+            text='blog_'
+            dataValue='blog_'
+            className='text-white text-[38px] md:text-7xl lg:text-[100px] relative  z-10 font-black font-craftworkGrotesk py-10 md:py-20 uppercase leading-[45px] md:leading-[86px] lg:leading-[120px]'
+            style=''
+          />
+
+          <div
+            class='flex items-center max-w-full md:max-w-[432px] relative z-10 mb-6 justify-between w-full bg-white/5 group hover:bg-blue-500/10 border border-white/20 rounded-full p-1 shadow-lg'
+          >
+            <div class='flex items-center pl-4 pr-2'>
+              <IconCollection icon='searchIcon' className='w-6 h-6' />
+              <input
+                type='text'
+                placeholder='Search by name'
+                class='bg-transparent border-none flex-1 text-white placeholder-gray-400 focus:outline-none ml-2 w-full max-w-64'
+                onInput={handleSearch}
+              />
+            </div>
+            <button
+              class='text-white max-w-[88px] w-full h-[45px] flex justify-center items-center text-lg font-normal font-generalSans bg-[#162149] group-hover:bg-blue-800 rounded-full mr-1'
+            >
+              Search
+            </button>
+          </div>
+
+          <div id='blog-cards' class='flex flex-wrap gap-8 mb-20 relative z-10'>
+            {
+              filteredBlogData
+                .slice(0, postsPerPage)
+                .map((post) => <BlogCard {...post} />)
+            }
+          </div>
+          <div
+            class='flex justify-center items-center space-x-4 text-white pb-24'
+          >
+            <button
+              id='prev-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+              disabled
+            >
+              <IconCollection
+                icon='arrowLeft'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </button>
+            <div class='flex items-center space-x-2'>
+              <div id='current-page'>1</div>
+              <div>of</div>
+              <div id='total-pages'>{totalPages}</div>
+            </div>
+            <button
+              id='next-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+            >
+              <IconCollection
+                icon='arrowRight2'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </button>
+          </div>
+          <Footer />
+        </div>
+      </section>
+    </div>
+    <script>
+      const blogData = JSON.parse(`{{serializedBlogData}}`);
+      const postsPerPage = 6;
+      let currentPage = 1;
+      let filteredBlogData = blogData;
+
+      const blogCards = document.getElementById('blog-cards');
+      const prevPageButton = document.getElementById('prev-page');
+      const nextPageButton = document.getElementById('next-page');
+      const currentPageDisplay = document.getElementById('current-page');
+      const totalPagesDisplay = document.getElementById('total-pages');
+
+      function renderPosts(page, data) {
+        const startIndex = (page - 1) * postsPerPage;
+        const endIndex = startIndex + postsPerPage;
+        blogCards.innerHTML = '';
+        data.slice(startIndex, endIndex).forEach((post) => {
+          const postCard = document.createElement('div');
+          postCard.classList.add(
+            'relative',
+            'max-w-full',
+            'md:max-w-[48%]',
+            'lg:max-w-[400px]',
+            'w-full',
+            'h-[284px]',
+            'rounded-3xl',
+            'group',
+            'overflow-hidden',
+          );
+          postCard.innerHTML = `
+            <img
+              src="${post.image}"
+              width="400"
+              height="284"
+              decoding="async"
+              loading="lazy"
+              alt="blog image"
+              class="relative object-cover rounded-3xl max-w-full md:max-w-[48%] lg:max-w-[400px] w-full h-[284px]"
+            />
+            <div
+              class="max-w-full md:max-w-full lg:max-w-[400px] w-full bottom-0 top-[35%] md:top-[40%] lg:top-[35%] group-hover:top-0 absolute left-0 cursor-pointer right-0 p-6 md:p-3 lg:p-6 hover-transition bg-black/40 rounded-tl-3xl rounded-tr-3xl backdrop-blur-[28px] flex-col justify-start items-start gap-8 inline-flex"
+            >
+              <div class="self-stretch grow shrink basis-0 flex-col justify-start items-start gap-5 flex">
+                <div class="self-stretch text-white text-2xl font-semibold font-craftworkGrotesk leading-7">
+                  ${post.title}
+                </div>
+                <div class="self-stretch text-white/90 text-lg font-normal font-generalSans leading-[27px] line-clamp-3">
+                  ${post.description}
+                </div>
+              </div>
+              <div class="self-stretch justify-between items-center inline-flex">
+                <div class="justify-start items-center gap-4 flex">
+                  <IconCollection icon='eyeIcon' className='h-6 w-6' />
+                  <div class='text-white text-base font-medium font-generalSans leading-[27px]'>${post.view}</div>
+                </div>
+                <div class="justify-start items-center gap-3 flex">
+                  <div class="px-5 py-3 bg-indigo-950 rounded-[20px] justify-start items-center gap-2.5 flex">
+                    <a href="#" class="text-white/90 text-lg font-light font-generalSans leading-[18px]">
+                      Read more
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          blogCards.appendChild(postCard);
+        });
+      }
+
+      function updateButtons() {
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled =
+          currentPage === Math.ceil(filteredBlogData.length / postsPerPage);
+        currentPageDisplay.textContent = currentPage;
+        totalPagesDisplay.textContent = Math.ceil(
+          filteredBlogData.length / postsPerPage,
+        );
+      }
+
+      function handleSearch(e) {
+        searchQuery = e.target.value;
+        filteredBlogData = blogData.filter((post) =>
+          post.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
+        currentPage = 1;
+        renderPosts(currentPage, filteredBlogData);
+        updateButtons();
+      }
+
+      prevPageButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPosts(currentPage, filteredBlogData);
+          updateButtons();
+        }
+      });
+
+      nextPageButton.addEventListener('click', () => {
+        if (currentPage < Math.ceil(filteredBlogData.length / postsPerPage)) {
+          currentPage++;
+          renderPosts(currentPage, filteredBlogData);
+          updateButtons();
+        }
+      });
+
+      renderPosts(currentPage, blogData);
+      updateButtons();
+
+      // Ensure the search input works by adding an event listener
+      document
+        .querySelector('input[type="text"]')
+        .addEventListener('input', handleSearch);
+    </script>
+  </body>
+</html>

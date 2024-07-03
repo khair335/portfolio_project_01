@@ -1,0 +1,52 @@
+---
+import AboutUs from '../conponent/AboutUs.astro';
+import Footer from '../conponent/Footer.astro';
+import Hero from '../conponent/Hero.astro';
+import IdoSection from '../conponent/IdoSection.astro';
+import Navbar from '../conponent/Navbar.astro';
+import RecentPost from '../conponent/RecentPost.astro';
+import IconCollection from '../IconCollection/IconCollection.astro';
+import '../styles/global.css';
+---
+
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+		<title>Astro</title>
+		<link
+			rel='stylesheet'
+			type='text/css'
+			charset='UTF-8'
+			href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+		/>
+		<link
+			rel='stylesheet'
+			type='text/css'
+			href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+		/>
+	</head>
+	<body class="mx-auto bg-stone-950 w-full">
+		<div
+			class='bg-stone-950 px-4 md:px-12 flex justify-center items-center w-full overflow-y-hidden'
+		>
+			<section
+				class='max-w-[673px] lg:max-w-[928px] xxl:max-w-[1344px] w-full mx-auto relative'
+			>
+				<div class='top-bg-section relative'>
+					<Navbar />
+					<Hero />
+					<IdoSection />
+				</div>
+				<AboutUs />
+
+				<div class='bottom-bg-section relative pt-[120px] md:pt-[220px] xxl:pt-[280px] 2xl:pt-[340px] pb-12'>
+					<RecentPost />
+					<Footer />
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

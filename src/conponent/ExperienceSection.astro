@@ -1,0 +1,128 @@
+---
+import AnimatedText from './AnimatedText.astro';
+
+const faqItems = [
+  {
+    date: '12/2024 - Current',
+    title: 'Forensics Escalation Engineer - Varonis Systems',
+    description:
+      'Forensics and incident commander for escalated cases, involving a wide range of malicious threats. Provided live incident triage with customers, forensics analysis, recommendations and remediation advice based on analysis. Developed the below projects for work between cases over many months, as the lead architect and primary developer.',
+    projects: [
+      'Extensible wizard allowing the team to fully customize what artefacts we want to collect, including 3rd party binaries;',
+      'Designed and engineered a complete pipeline for converting raw forensics artefacts and ingesting it to SIEMs.',
+    ],
+  },
+  {
+    date: '12/2021 - 11/2023',
+    title: 'Senior Cyber Threat Hunter - USCYBERCOM/USAF',
+    description:
+      'Forensics and incident commander for escalated cases, involving a wide range of malicious threats. Provided live incident triage with customers, forensics analysis, recommendations and remediation advice based on analysis. Developed the below projects for work between cases over many months, as the lead architect and primary developer.',
+    projects: [
+      'Extensible wizard allowing the team to fully customize what artefacts we want to collect, including 3rd party binaries;',
+      'Designed and engineered a complete pipeline for converting raw forensics artefacts and ingesting it to SIEMs.',
+    ],
+  },
+  {
+    date: '06/2020 - 12/2021',
+    title: 'Cyber Threat Hunter - USCYBERCOM/USAF',
+    description:
+      'Forensics and incident commander for escalated cases, involving a wide range of malicious threats. Provided live incident triage with customers, forensics analysis, recommendations and remediation advice based on analysis. Developed the below projects for work between cases over many months, as the lead architect and primary developer.',
+    projects: [
+      'Extensible wizard allowing the team to fully customize what artefacts we want to collect, including 3rd party binaries;',
+      'Designed and engineered a complete pipeline for converting raw forensics artefacts and ingesting it to SIEMs.',
+    ],
+  },
+  {
+    date: '09/2016 - 05/2020',
+    title: 'Senior Data Link & Threat Intelligence Analyst',
+    description:
+      'Forensics and incident commander for escalated cases, involving a wide range of malicious threats. Provided live incident triage with customers, forensics analysis, recommendations and remediation advice based on analysis. Developed the below projects for work between cases over many months, as the lead architect and primary developer.',
+    projects: [
+      'Extensible wizard allowing the team to fully customize what artefacts we want to collect, including 3rd party binaries;',
+      'Designed and engineered a complete pipeline for converting raw forensics artefacts and ingesting it to SIEMs.',
+    ],
+  },
+  // Add more items as needed
+];
+---
+
+<div class="pb-20">
+
+   <AnimatedText
+          text='Experience_'
+          dataValue='Experience_'
+          className='text-white  text-[38px] md:text-7xl   lg:text-[100px] font-black font-craftworkGrotesk py-20 uppercase leading-[120px]'
+          style=''
+        />
+  <div class='space-y-4'>
+    {
+      faqItems.map((item, index) => (
+        <details class={` rounded-3xl p-6 md:p-8 group bg-white/5`}>
+          <summary class='flex justify-between items-start md:items-center cursor-pointer'>
+            <div>
+              <p class='text-blue-500 text-lg md:text-xl font-normal font-generalSans pb-2'>
+                {item.date}
+              </p>
+              <p class='text-white text-xl md:text-2xl font-medium font-generalSans pb-6'>
+                {item.title}
+              </p>
+            </div>
+            <svg
+              class='min-w-6 min-h-6 text-white group-open:-rotate-90 transform transition-transform'
+              width='32'
+              height='32'
+              viewBox='0 0 32 32'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M26 6L26 26M26 26H6M26 26L6 6'
+                stroke='white'
+                stroke-width='2'
+                stroke-miterlimit='10'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              />
+            </svg>
+          </summary>
+          {item.description && (
+            <div class='mt-4 text-white text-sm'>
+              <p class='text-white/90 text-base md:text-lg font-normal font-generalSans leading-[27px] pb-8'>
+                {item.description}
+              </p>
+              {item.projects.length > 0 && (
+                <div class='mt-2'>
+                  <h4 class='text-white text-base md:text-lg font-medium font-generalSans pb-4 leading-[25.20px]'>
+                    Projects:
+                  </h4>
+                  <ul class='list-disc list-inside text-white/90 text-base md:text-lg font-normal font-generalSans leading-[27px]'>
+                    {item.projects.map((project) => (
+                      <li>{project}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        </details>
+      ))
+    }
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const detailsElements = document.querySelectorAll('details');
+
+    detailsElements.forEach((details) => {
+      details.addEventListener('toggle', (event) => {
+        if (details.open) {
+          details.classList.add('bg-blue-700/10');
+          details.classList.remove('bg-white/5');
+        } else {
+          details.classList.remove('bg-blue-700/10');
+          details.classList.add('bg-white/5');
+        }
+      });
+    });
+  });
+</script>

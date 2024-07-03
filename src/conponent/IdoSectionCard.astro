@@ -1,0 +1,47 @@
+---
+import IconCollection from '../IconCollection/IconCollection.astro';
+
+const { iconName, iconNameClassName, projectName, projectDescription } =
+  Astro.props;
+---
+
+<div class="relative p-1 group">
+  <span class="absolute top-0 right-0 left-0 bottom-0 group-hover:bg-gradient-to-r from-lime-400 to-blue-700 z-[2] rounded-3xl"></span>
+  <div
+    class="rounded-3xl bg-black z-[3] opacity-100  relative "
+  >
+
+    <div
+      class={`
+    max-w-full md:max-w-[316px]  lg:max-w-[452px] xxl:max-w-[648px] i-do-card w-full p-8 bg-white/5 group-hover:bg-blue-700/10 z-10 cursor-pointer  border-none  rounded-3xl backdrop-blur-[28px] group-hover:backdrop-blur-0 flex-col justify-start items-start gap-5 inline-flex relative transition-all duration-300
+  `}
+    >
+      <div class='flex justify-between items-center w-full'>
+        <IconCollection icon={iconName} className={iconNameClassName} />
+        <div class='w-4 h-4 bg-zinc-700 rounded-[40px] group-hover:hidden'>
+        </div>
+        <div
+          class='w-[86px] h-[42px] px-5 py-3 bg-blue-800 rounded-[20px] justify-start items-center gap-2.5 hidden group-hover:inline-flex'
+        >
+          <div
+            class='text-white/90 text-lg font-medium font-generalSans leading-[18px]'
+          >
+            Open
+          </div>
+        </div>
+      </div>
+      <div
+        class='text-white text-2xl font-semibold font-craftworkGrotesk leading-7'
+      >
+        {projectName}
+      </div>
+      <div
+        class='text-white/90 text-lg font-normal font-generalSans leading-[27px]'
+      >
+        {projectDescription}
+      </div>
+    </div>
+  </div>
+</div>
+
+

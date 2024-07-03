@@ -1,0 +1,145 @@
+---
+import IconCollection from '../IconCollection/IconCollection.astro';
+---
+
+<div class='pt-8 relative z-20'>
+  <div
+    class='max-w-[1344px] relative z-10 w-full h-[68px] px-7 py-4 bg-neutral-900/40 rounded-[20px] shadow border border-neutral-300/10 backdrop-blur-[28px] justify-between items-center inline-flex'
+  >
+    <a
+      href='/'
+      class='hacked-text text-white text-xl font-bold font-plusJakartaSans leading-normal'
+    >
+      Xynaptik
+    </a>
+
+    <div class='hidden md:flex gap-16 items-center'>
+      <div class='flex gap-8 items-center'>
+        <a
+          href='/projects'
+          class="text-white text-base font-medium font-generalSans px-3 py-2 leading-none"
+        >
+          Projects Page
+        </a>
+        <a
+          href='/about'
+          class="text-white text-base font-medium font-generalSans px-3 py-2 leading-none"
+        >
+          About me
+        </a>
+        <a
+          href='/blog'
+          class="text-white text-base font-medium font-generalSans px-3 py-2 leading-none"
+        >
+          Blog
+        </a>
+      </div>
+      <div class='flex gap-4 items-center'>
+        <a href=''>
+          <IconCollection icon='gitHubIcon' className='w-7 h-7' />
+        </a>
+        <a href=''>
+          <IconCollection icon='linkdineIcon' className='w-6 h-6' />
+        </a>
+      </div>
+    </div>
+    <div class='md:hidden' id='menuToggle'>
+      <IconCollection
+        id='barIcon'
+        icon='barIcon'
+        className='w-[27px] h-[18px]'
+      />
+    </div>
+  </div>
+
+  <div
+    id='menu'
+    class='menu hidden absolute top-8 left-0 right-0 bg-neutral-900/40 rounded-[20px] shadow border border-neutral-300/10 backdrop-blur-[28px] p-6 z-30'
+  >
+    <div class='flex justify-between items-center pb-9'>
+      <a
+        href='/'
+        class='hacked-text text-white text-xl font-bold font-plusJakartaSans leading-normal'
+      >
+        Xynaptik
+      </a>
+      <div id='closeIcon'>
+        <IconCollection icon='closeIcon' className='w-6 h-6' />
+      </div>
+    </div>
+    <div class='flex flex-col items-center gap-y-4'>
+      <a
+        href='/projects'
+        class="text-white/95 text-sm font-medium font-generalSans leading-none p-3"
+      >
+        Projects Page
+      </a>
+      <a
+        href='/about'
+        class="text-white/95 text-sm font-medium font-generalSans leading-none p-3"
+      >
+        About me
+      </a>
+      <a
+        href='/blog'
+        class="text-white/95 text-sm font-medium font-generalSans leading-none p-3"
+      >
+        Blog
+      </a>
+      <div class='flex gap-4 items-center mt-8'>
+        <a href=''>
+          <IconCollection icon='gitHubIcon' className='w-7 h-7' />
+        </a>
+        <a href=''>
+          <IconCollection icon='linkdineIcon' className='w-6 h-6' />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  #menu.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let isMenuOpen = false;
+
+    const toggleMenu = () => {
+      const menu = document.getElementById('menu');
+      const barIcon = document.getElementById('barIcon');
+      const closeIcon = document.getElementById('closeIcon');
+
+      console.log('isMenuOpen before toggle:', isMenuOpen);
+      isMenuOpen = !isMenuOpen;
+      console.log('isMenuOpen after toggle:', isMenuOpen);
+
+      if (isMenuOpen) {
+        menu.classList.remove('hidden');
+        setTimeout(() => menu.classList.add('show'), 10); // Add a small delay to trigger transition
+      } else {
+        menu.classList.remove('show');
+        menu.addEventListener('transitionend', () => {
+          if (!isMenuOpen) {
+            menu.classList.add('hidden');
+          }
+        }, { once: true });
+      }
+
+      barIcon.classList.toggle('hidden', isMenuOpen);
+      closeIcon.classList.toggle('hidden', !isMenuOpen);
+    };
+
+    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+    document.getElementById('closeIcon').addEventListener('click', toggleMenu);
+  });
+</script>

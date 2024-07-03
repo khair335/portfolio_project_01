@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/heroImg.svg';
+import IconCollection from '../IconCollection/IconCollection.astro';
+---
+
+<div
+    class='max-[1344px] w-full h-auto md:h-32 px-7 py-6 bg-neutral-900/40 rounded-[20px] shadow border border-neutral-300/10 backdrop-blur-[28px] justify-start items-start gap-6 flex-col md:flex-row inline-flex'
+>
+    <div
+        class='grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex'
+    >
+        <div class='w-[100px] justify-start items-center gap-2 inline-flex'>
+            <div
+                class='text-white text-xl font-bold font-plusJakartaSans leading-normal'
+            >
+                Xynaptik
+            </div>
+        </div>
+        <div
+            class="text-zinc-400 text-base hidden md:block font-normal font-sFProDisplay"
+        >
+            © 2023 Xynaptik. All rights reserved.
+        </div>
+    </div>
+    <div class='grow shrink basis-0 h-auto md:h-20 justify-start items-start gap-6 flex-col md:flex-row flex'>
+        <div
+            class='grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex'
+        >
+            <a
+                href=''
+                class='text-white/95 text-base font-medium font-generalSans leading-none'
+                >Projects Page</a
+            >
+            <a
+                href=''
+                class='text-white/95 text-base font-medium font-generalSans leading-none'
+                >About me</a
+            >
+            <a
+                href=''
+                class='text-white/95 text-base font-medium font-generalSans leading-none'
+                >Blog</a
+            >
+        </div>
+        <div
+            class='grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex'
+        >
+            <div
+                class='text-white/95 text-base font-medium font-generalSans leading-none'
+            >
+                hireme@kaladin.dev
+            </div>
+            <div class='justify-end items-center gap-3 inline-flex'>
+                <a href=''>
+                    <IconCollection icon='gitHubIcon' className='w-7 h-7' />
+                </a>
+                <a href=''>
+                    <IconCollection icon='linkdineIcon' className='w-6 h-6' />
+                </a>
+            </div>
+        </div>
+    </div>
+      <div
+            class="text-zinc-400 text-base font-normal block md:hidden font-sFProDisplay"
+        >
+            © 2023 Xynaptik. All rights reserved.
+        </div>
+    </div>
+</div>

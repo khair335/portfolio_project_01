@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+
+import IconCollection from '../IconCollection/IconCollection.astro';
+
+import Navbar from '../conponent/Navbar.astro';
+import Footer from '../conponent/Footer.astro';
+import SummarySection from '../conponent/SummarySection.astro';
+import ExperienceSection from '../conponent/ExperienceSection.astro';
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Blog</title>
+    <link
+      rel='stylesheet'
+      type='text/css'
+      charset='UTF-8'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+    />
+    <link
+      rel='stylesheet'
+      type='text/css'
+      href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+    />
+  </head>
+  <body class='bg-stone-950  mx-auto w-full '>
+    <div class='px-4 md:px-12 flex justify-center items-center w-full overflow-y-hidden'>
+      <section
+        class='max-w-[900px] lg:max-w-[928px] xxl:max-w-[1344px] w-full mx-auto relative'
+      >
+        <div class='top-bg-section relative pb-12'>
+          <Navbar />
+          <SummarySection />
+          <ExperienceSection />
+
+          <Footer />
+        </div>
+      </section>
+
+    </div>
+  </body>
+</html>
