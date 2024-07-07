@@ -111,9 +111,12 @@
 
 .recent-slider .slick-prev {
  left: unset !important;
+     right: 100px !important;
+    top: -120px !important;
 }
 .recent-slider .slick-next {
- right: unset !important;
+ right: 36px !important;
+    top: -120px !important;
 }
 @media (max-width:1024px) {
   .top-bg-section:after {
