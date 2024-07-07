@@ -103,7 +103,18 @@
   height: 100% !important;
 }
 
+.recent-slider .slick-next:before,
+.recent-slider .slick-prev:before
+ {
+  opacity: 0 !important;
+}
 
+.recent-slider .slick-prev {
+ left: unset !important;
+}
+.recent-slider .slick-next {
+ right: unset !important;
+}
 @media (max-width:1024px) {
   .top-bg-section:after {
         top: 0;
