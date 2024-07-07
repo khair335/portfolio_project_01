@@ -112,7 +112,8 @@
   }
 }
 @media (max-width:767px) {
-  .top-bg-section {
- /* background-image: url("../assets/bg-line-1-mobile.svg"); */
+  .top-bg-section:after{
+        left: -20%;
+    width: 413px;
   }
 }

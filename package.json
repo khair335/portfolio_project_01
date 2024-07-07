@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^5.1.1",
+    "@astrojs/mdx": "^3.1.2",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.11.3",
     "react-slick": "^0.30.2",
