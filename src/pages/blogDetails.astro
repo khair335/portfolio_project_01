@@ -6,8 +6,7 @@ import { Image } from 'astro:assets';
 import Navbar from '../conponent/Navbar.astro';
 import Footer from '../conponent/Footer.astro';
 import MarkdownContent from '../content/vmware-homelab-automation-with-vagrant.mdx';
-const { lang, version } = Astro.params;
-console.log("version",lang,version);
+
 
 ---
 
@@ -466,7 +465,7 @@ const blogData = Array.from({ length: 30 }, (_, index) => ({
         const blog = blogData.find((blog) => blog.id  == blogId );
 
       if (blog) {
-        console.log(blog);
+
         document.getElementById('blog-title').textContent = blog.title;
       } else {
         console.log('Blog post not found');

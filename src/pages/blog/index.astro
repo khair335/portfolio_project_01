@@ -127,7 +127,7 @@ import project2 from '../../assets/project2.jpeg';
 
 const handeSearchBlog = () =>{
    const inputValue = myInput.value.toLowerCase();
-  console.log('handeSearchBlog',inputValue);
+
 const blogData = Array.from({ length: 30 }, (_, index) => ({
    id: index + 1,
   title: `Blog Post Title ${index + 1}`,
@@ -163,7 +163,7 @@ document.getElementById('SearchButton').addEventListener('click', handeSearchBlo
     const endIndex = startIndex + postsPerPage;
     let blogCards = document.getElementById('blog-cards');
     blogCards.innerHTML = '';
-    console.log(data.slice(startIndex, endIndex))
+
     data.slice(startIndex, endIndex).forEach((post) => {
       const postCard = document.createElement('div');
       postCard.classList.add(
@@ -233,16 +233,6 @@ document.getElementById('SearchButton').addEventListener('click', handeSearchBlo
   }
 
 
-  // function handleSearch(e) {
-  //   const searchQuery = e.target.value.toLowerCase();
-  //   console.log("searchQuery",searchQuery);
-  //   filteredBlogData = blogData.filter((post) =>
-  //     post.title.toLowerCase().includes(searchQuery)
-  //   );
-  //   currentPage = 1;
-  //   renderPosts(currentPage, filteredBlogData);
-  //   updateButtons();
-  // }
 
 
   prevPageButton.addEventListener('click', () => {
