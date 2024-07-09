@@ -1,0 +1,86 @@
+---
+import {getCollection} from "astro:content"
+import IconCollection from '../IconCollection/IconCollection.astro'
+type Props = {
+    page: number
+    numberOfPosts: number
+    postsPerPage: number
+    totalPages:number
+}
+
+const {page, numberOfPosts ,postsPerPage,totalPages} = Astro.props
+console.log("page",page);
+
+const hasPreviousPosts = page > 1
+const hasNextPosts = numberOfPosts > page * postsPerPage
+---
+
+<div
+            class='flex justify-center items-center space-x-4 text-white pb-24'
+          >
+            <button
+              id='prev-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+              disabled
+            >
+                {
+        hasPreviousPosts ? (
+            <a
+                href={`?page=${page - 1}`}
+
+            >
+               <IconCollection
+                icon='arrowLeft'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </a>
+        ) : (
+                <a
+                href={`?page=${page}`}
+
+            >
+               <IconCollection
+                icon='arrowLeft'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </a>
+        )
+    }
+
+            </button>
+            <div class='flex items-center space-x-2'>
+              <div id='current-page'>{page}</div>
+              <div>of</div>
+              <div id='total-pages'>{totalPages}</div>
+            </div>
+            <button
+              id='next-page'
+              class='w-12 h-12 flex justify-center items-center rounded-full bg-white/20 hover:bg-white group'
+            >
+            {
+        hasNextPosts ? (
+            <a
+                href={`?page=${page + 1}`}
+
+            >
+                <IconCollection
+                icon='arrowRight2'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </a>
+        ) : (
+             <a
+                href={`?page=${page}`}
+
+            >
+                <IconCollection
+                icon='arrowRight2'
+                className='w-9 h-9 fill-black group-hover:fill-white'
+              />
+            </a>
+        )
+    }
+
+            </button>
+          </div>
+

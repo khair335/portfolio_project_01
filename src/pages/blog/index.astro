@@ -5,12 +5,26 @@ import BlogCard from '../../component/BlogCard.astro';
 import Footer from '../../component/Footer.astro';
 import AnimatedText from '../../component/AnimatedText.astro';
 import IconCollection from '../../IconCollection/IconCollection.astro';
+import Pagination from '../../component/Pagination.astro';
 
 const blogPosts = await getCollection('blog');
-const postsPerPage = 6;
-let currentPage = 1;
+
+
 let filteredBlogData = blogPosts;
+const postsPerPage = 6
 const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+const currentPath = Astro.url;
+console.log(currentPath,"currentPath")
+let currentPage = Number(Astro.url.searchParams.get("page")) || 1; // Default to page 1 if 'page' parameter is not specified
+
+
+const start = postsPerPage * (currentPage - 1)
+const end = start + postsPerPage
+
+
+const posts = blogPosts.slice(start, end)
+const allCategories = blogPosts.flatMap(post => post.data.categories)
+const categories = Array.from(new Set(allCategories))
 // Save to localStorage
 ---
 
@@ -58,7 +72,7 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
           </div>
           <div id='blog-cards' class='flex flex-wrap gap-8 mb-20 relative z-10'>
             {
-              filteredBlogData
+              posts
                 .slice(0, postsPerPage)
                 .map((post) => (
                   <BlogCard
@@ -71,7 +85,8 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
                 ))
             }
           </div>
-          <div
+           <Pagination  totalPages={totalPages} page={currentPage} numberOfPosts={blogPosts.length} postsPerPage={postsPerPage} />
+          <!-- <div
             class='flex justify-center items-center space-x-4 text-white pb-24'
           >
             <button
@@ -98,7 +113,7 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
                 className='w-9 h-9 fill-black group-hover:fill-white'
               />
             </button>
-          </div>
+          </div> -->
           <div id='blogPostsContainer'></div>
           <Footer />
         </div>
@@ -111,11 +126,9 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
       async function getPosts() {
         const blogPosts = await getCollection('blog');
 
-
         const myInput = document.getElementById('myInput');
 
         const inputValue = myInput.value.toLowerCase();
-
 
         const filteredBlogData = blogPosts
           .filter((post) => post.data.title.toLowerCase().includes(inputValue))
