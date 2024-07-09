@@ -1,12 +1,25 @@
 ---
-
-import '../styles/global.css';
+import { CollectionEntry, getCollection } from 'astro:content';
+import '../../styles/global.css';
 import { Image } from 'astro:assets';
-import Navbar from '../conponent/Navbar.astro';
-import Footer from '../conponent/Footer.astro';
-const { frontmatter } = Astro.props;
+import Navbar from '../../component/Navbar.astro';
+import Footer from '../../component/Footer.astro';
 
-const { title,pubDate, views, pubTime,authorImg, readTime, author, image } = frontmatter;
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+
+const { Content } = await post.render();
+
+
+const { title,pubDate, views, pubTime,authorImg, readTime, author, image } = post.data;
 
 const formatViewCount = (view) => {
   if (views >= 1000) {
@@ -24,7 +37,6 @@ const formatPostTime = (time) => {
   return `${pubTime} min`;
 };
 ---
-
 <html>
   <head>
     <title>{title}</title>
@@ -38,7 +50,7 @@ const formatPostTime = (time) => {
           <Navbar />
 
           <!-- Banner Section -->
-          <div style={{ backgroundImage: `url(${image.src})` }} class='blogBanner py-10 md:py-20 my-10 rounded-lg relative z-10 flex justify-center items-center'>
+          <div style={{ backgroundImage: `url(${image.src})` }} class='blogBanner bg-no-repeat bg-cover py-10 md:py-20 my-10 rounded-lg relative z-10 flex justify-center items-center'>
             <div class='max-w-[1000px] w-full px-10'>
               <p class='font-craftworkGrotesk text-white text-lg lg:text-3xl font-bold pb-5'>Article</p>
               <h1 id="blog-title" class='text-white text-3xl lg:text-7xl font-generalSans text-left font-medium'>{title}</h1>
@@ -63,7 +75,8 @@ const formatPostTime = (time) => {
             <!-- Markdown Content -->
             <div class='col-span-12 md:col-span-9 pr-0 md:pr-10 mb-20'>
               <div class="markdown-container">
-                <slot />
+                <!-- <slot /> -->
+              	<Content />
               </div>
             </div>
 
@@ -154,7 +167,7 @@ const formatPostTime = (time) => {
             }, 2000); // Reset button text after 2 seconds
           },
           function (err) {
-            console.error('Could not copy text: ', err);
+
           }
         );
       }
@@ -162,71 +175,3 @@ const formatPostTime = (time) => {
   </body>
 </html>
 
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      h2 {
-        color: #fff;
-        font-size: 48px;
-      }
-      .blogBanner {
-        /* background-image: url('../assets/project1.jpeg'); */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-      /* global.css */
-      .code-block {
-        position: relative;
-        background-color: #1f2937;
-        border-radius: 8px;
-        padding: 1rem;
-        overflow: hidden;
-      }
-
-      .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #4a4a4a;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        display: none;
-      }
-
-      .code-block:hover .copy-button {
-        display: block;
-      }
-
-      .active {
-        color: #ef4444; /* red-500 */
-        font-weight: bold;
-      }
-
-      /* Sticky sidebar */
-      .sidebar {
-        max-height: 100vh;
-        overflow-y: auto;
-      }
-      code {
-        max-width: 350px;
-        width: 100%;
-        word-break: break-all;
-        word-wrap: break-word;
-      }
-      pre {
-        display: inline-block;
-        white-space: normal;
-        max-width: 100%;
-        word-break: break-all;
-        word-wrap: break-word;
-      }
-      ul {
-        margin-bottom: 20px;
-      }
-    </style>

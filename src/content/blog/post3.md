@@ -1,11 +1,10 @@
 ---
 title: "Python Selfbots and Webhooks in Discord Pt. 1"
-pubTime: 11
+pubTime: 12
+pubDate:  2024-07-08T00:00:00Z
 views: 1500
-pubDate: "2024-07-08T00:00:00Z"
-readTime: 10
 image: {
-  src: "/src/assets/project2.jpeg",
+ src: "/src/assets/project2.jpeg",
   alt: "A picture of a coder",
 }
 author: Kaladin Brightlord
@@ -14,7 +13,7 @@ authorImg: {
   alt: "A picture of a coder",
 }
 description: "Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools. Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools."
-layout: "../../layouts/BlogLayout.astro"
+
 ---
 
 # VMware Homelab Automation with Vagrant

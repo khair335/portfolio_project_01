@@ -2,10 +2,10 @@
 title: "Automating your VMware Homelab with Vagrant"
 pubTime: 12
 pubDate: "2024-07-08T00:00:00Z"
-views: 1500
+views: 1000
 readTime: 10
 image: {
-  src: "/src/assets/project1.jpeg",
+ src: "/src/assets/project1.jpeg",
   alt: "A picture of a coder",
 }
 author: Kaladin Brightlord
@@ -15,7 +15,7 @@ authorImg: {
 }
 description: "Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools. Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools."
 
-layout: "../../layouts/BlogLayout.astro"
+
 ---
 
 # VMware Homelab Automation with Vagrant

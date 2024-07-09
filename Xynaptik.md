@@ -25,7 +25,7 @@
             └── project1.jpeg
             └── project2.jpeg
             └── react.png
-        └── 📁conponent
+        └── 📁component
             └── AboutUs.astro
             └── AnimatedText.astro
             └── BlogCard.astro

@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import Navbar from '../../conponent/Navbar.astro';
-import BlogCard from '../../conponent/BlogCard.astro';
-import Footer from '../../conponent/Footer.astro';
-import AnimatedText from '../../conponent/AnimatedText.astro';
+import Navbar from '../../component/Navbar.astro';
+import BlogCard from '../../component/BlogCard.astro';
+import Footer from '../../component/Footer.astro';
+import AnimatedText from '../../component/AnimatedText.astro';
 import IconCollection from '../../IconCollection/IconCollection.astro';
 
 const blogPosts = await getCollection('blog');
@@ -110,12 +110,12 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
       async function getPosts() {
         const blogPosts = await getCollection('blog');
-        console.log(blogPosts, 'posts');
+
 
         const myInput = document.getElementById('myInput');
 
         const inputValue = myInput.value.toLowerCase();
-        console.log('inputValue ', inputValue);
+
 
         const filteredBlogData = blogPosts
           .filter((post) => post.data.title.toLowerCase().includes(inputValue))
