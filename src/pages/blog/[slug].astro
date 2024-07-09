@@ -15,9 +15,9 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-console.log("post",post);
+
 const { Content } = await post.render();
-console.log("Content",post.body);
+
 
 const { title,pubDate, views, pubTime,authorImg, readTime, author, image } = post.data;
 
@@ -167,7 +167,7 @@ const formatPostTime = (time) => {
             }, 2000); // Reset button text after 2 seconds
           },
           function (err) {
-            console.error('Could not copy text: ', err);
+
           }
         );
       }

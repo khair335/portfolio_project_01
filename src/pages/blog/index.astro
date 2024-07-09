@@ -57,7 +57,7 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
                 const last_part = parts[parts.length - 1];
 
                 const file_name = last_part.split('.')[0];
-                console.log('blogPostss', file_name);
+
                 return (
                   <BlogCard
                     frontmatter={post.frontmatter}
@@ -98,11 +98,11 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
       async function getPosts() {
         const blogPosts = await getCollection('blog');
-        console.log(blogPosts, 'posts');
+
 
         const myInput = document.getElementById('myInput');
         const inputValue = myInput.value.toLowerCase();
-        console.log('inputValue ', inputValue);
+
 
         const filteredBlogData = blogPosts
           .filter((post) => post.data.title.toLowerCase().includes(inputValue))

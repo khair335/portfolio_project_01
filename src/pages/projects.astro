@@ -110,12 +110,12 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
       async function getPosts() {
         const blogPosts = await getCollection('blog');
-        console.log(blogPosts, 'posts');
+
 
         const myInput = document.getElementById('myInput');
 
         const inputValue = myInput.value.toLowerCase();
-        console.log('inputValue ', inputValue);
+
 
         const filteredBlogData = blogPosts
           .filter((post) => post.data.title.toLowerCase().includes(inputValue))
