@@ -4,12 +4,12 @@ pubTime: 12
 pubDate:  2024-07-08T00:00:00Z
 views: 1500
 image: {
- src: "/src/assets/project2.jpeg",
+ src: "../../assets/project2.jpeg",
   alt: "A picture of a coder",
 }
 author: Kaladin Brightlord
 authorImg: {
- src: "/src/assets/project2.jpeg",
+ src: "../../assets/project2.jpeg",
   alt: "A picture of a coder",
 }
 description: "Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools. Creating custom Discord selfbots when Discord's Webhooks aren't enough. With a dash of Python and a dab of Chrome Dev tools."
