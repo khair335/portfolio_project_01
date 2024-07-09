@@ -3,25 +3,14 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import IconCollection from '../IconCollection/IconCollection.astro';
 import AnimatedText from './AnimatedText.astro';
-
-const slides = [
-  {
-    title: 'Slide 1',
-    description: 'This is the description for slide 1.',
-  },
-  {
-    title: 'Slide 2',
-    description: 'This is the description for slide 2.',
-  },
-  {
-    title: 'Slide 3',
-    description: 'This is the description for slide 3.',
-  },
-  {
-    title: 'Slide 3',
-    description: 'This is the description for slide 3.',
-  },
-];
+import { getCollection } from 'astro:content';
+const blogPosts = await getCollection('blog');
+const formatViewCount = (views) => {
+  if (views >= 1000) {
+    return `${(views / 1000).toFixed(1)}K`;
+  }
+  return views;
+};
 ---
 
 <head>
@@ -71,31 +60,27 @@ const slides = [
   <div class='slider-container recent-slider'>
     <div class='slider-recent'>
       {
-        slides.map((slide) => (
+        blogPosts.map((slide) => (
           <div class='slick-slide'>
             <div class="relative p-[5px] group">
               <span class="absolute top-0 right-0 left-0 bottom-0 group-hover:bg-gradient-to-r from-lime-400 to-blue-700 z-[2] rounded-3xl"></span>
               <div class="rounded-3xl bg-black z-[3] opacity-100  relative ">
                 <div class='max-w-full md:max-w-[432px] w-full relative z-[3] px-6 xxl:px-8 py-6 xxl:py-9  bg-white/5 group-hover:bg-sky-100/10 cursor-pointer rounded-3xl backdrop-blur-[44px] group-hover:backdrop-blur-0 flex-col justify-start items-start gap-7 inline-flex'>
                   <div class='self-stretch text-white text-[22px] md:text-xl xxl:text-2xl font-semibold font-generalSans leading-7'>
-                    Why Perl is better than Python for Exploit Development
+                    {slide.data.title}
                   </div>
                   <div class='self-stretch text-white/90 text-base xxl:text-lg font-normal font-generalSans hidden md:block leading-[27px] !line-clamp-3'>
-                    This is a bold claim considering how much Python is used for
-                    writing exploits, however as we compare the output of some
-                    shellcode produced from both Perl and Python, you will see
-                    why Perl can be the better choice in most scenarios, or at
-                    least more straightforward.
+                    {slide.data.description}
                   </div>
                   <div class='w-full flex justify-between items-center'>
                     <div class='flex items-center gap-2'>
                       <IconCollection icon='eyeIcon' className='h-6 w-6' />
                       <div class='text-white text-base xxl:text-lg font-medium font-generalSans leading-[27px]'>
-                        11,6K
+                        {formatViewCount(slide.data.views)}
                       </div>
                     </div>
                     <a
-                      href=''
+                      href={`/blog/${slide.slug}`}
                       class='max-w-[162px] w-full h-[42px] bg-indigo-950 group-hover:bg-blue-800 rounded-[20px] justify-center items-center gap-2.5 inline-flex'
                     >
                       <div class='text-white text-lg font-normal font-generalSans leading-[18px] '>

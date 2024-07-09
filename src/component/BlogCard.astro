@@ -2,7 +2,7 @@
 import IconCollection from '../IconCollection/IconCollection.astro';
 const { title, description, views, pubTime, href } = Astro.props;
 
-const formatViewCount = (view) => {
+const formatViewCount = (views) => {
   if (views >= 1000) {
     return `${(views / 1000).toFixed(1)}K`;
   }
@@ -10,7 +10,7 @@ const formatViewCount = (view) => {
 };
 
 // Function to format the post time
-const formatPostTime = (time) => {
+const formatPostTime = (pubTime) => {
   if (pubTime >= 60) {
     const hours = (pubTime / 60).toFixed(2);
     return `${hours} h`;
