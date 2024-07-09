@@ -67,7 +67,7 @@ const formatPostTime = (time) => {
                   <a class='font-plusJakartaSans text-white text-lg hover:underline' href=''>{author}</a>
                   <div class='flex gap-2 text-xs text-white font-plusJakartaSans'>
                     <p> {new Date(pubDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
-                    <p><span class='pr-2'>-</span> {formatPostTime(pubTime)} read</p>
+                    <p><span class='pr-2'>-</span> {formatPostTime(readTime)} read</p>
                     <p><span class='pr-2'>-</span> {formatViewCount(views)} view</p>
                   </div>
                 </div>
