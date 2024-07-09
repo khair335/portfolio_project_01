@@ -124,20 +124,7 @@
   top: -120px !important;
 }
 
-@media (max-width:1024px) {
-  .top-bg-section:after {
-    top: 0;
-    left: -50%;
 
-  }
-}
-
-@media (max-width:767px) {
-  .top-bg-section:after {
-    left: -20%;
-    width: 413px;
-  }
-}
 
 
 
@@ -188,4 +175,32 @@
     padding: 4px 16px;
     border-radius: 20px;
     color: #fff;
+}
+
+@media (max-width:1024px) {
+  .top-bg-section:after {
+    top: 0;
+    left: -50%;
+
+  }
+
+  .markdown-container h1{
+
+  font-size: 30px;
+}
+.markdown-container h2 {
+
+  font-size: 30px;
+}
+
+.markdown-container p {
+  font-size: 16px;
+}
+}
+
+@media (max-width:767px) {
+  .top-bg-section:after {
+    left: -20%;
+    width: 413px;
+  }
 }

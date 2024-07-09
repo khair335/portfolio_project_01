@@ -20,7 +20,7 @@ const { Content } = await post.render();
 
 
 const { title,pubDate, views, pubTime,authorImg, readTime, author, image } = post.data;
-console.log("image",authorImg);
+
 
 const formatViewCount = (view) => {
   if (views >= 1000) {
@@ -40,11 +40,14 @@ const formatPostTime = (time) => {
 ---
 <html>
   <head>
+       <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
     <title>{title}</title>
 
   </head>
   <body class='mx-auto bg-stone-950 w-full'>
-    <div class='bg-stone-950 px-4 md:px-12 flex justify-center items-center w-full '>
+    <div class='bg-stone-950 px-4 md:px-12 flex justify-center items-center w-full overflow-x-hidden'>
       <section class='max-w-[673px] lg:max-w-[928px] xxl:max-w-[1344px] w-full mx-auto relative'>
         <div class='top-bg-section pb-12 relative z-10'>
           <!-- Navbar Component -->
@@ -52,7 +55,7 @@ const formatPostTime = (time) => {
 
           <!-- Banner Section -->
           <div style={{ backgroundImage: `url(${image.src.src})` }} class='blogBanner bg-no-repeat bg-cover py-10 md:py-20 my-10 rounded-lg relative z-10 flex justify-center items-center'>
-           <!-- <Image src={image.src} alt={authorImg.alt}  class='absolute top-0 bottom-0 left-0 right-0 ' /> -->
+
             <div class='max-w-[1000px] w-full px-10'>
               <p class='font-craftworkGrotesk text-white text-lg lg:text-3xl font-bold pb-5'>Article</p>
               <h1 id="blog-title" class='text-white text-3xl lg:text-7xl font-generalSans text-left font-medium'>{title}</h1>
