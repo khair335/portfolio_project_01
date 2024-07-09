@@ -5,13 +5,21 @@ import Footer from '../../component/Footer.astro';
 import AnimatedText from '../../component/AnimatedText.astro';
 import IconCollection from '../../IconCollection/IconCollection.astro';
 
-const blogPosts = await Astro.glob('../../content/blog/*.md');
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("./*.md");
+
+  return paginate(allPosts, {
+    pageSize: 5,  // Adjust pageSize as needed
+  });
+}
+
+const { page } = Astro.props;
 const postsPerPage = 6;
 let currentPage = 1;
-let filteredBlogData = blogPosts;
-const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+let filteredBlogData = page.data;
+const totalPages = Math.ceil(page.data / postsPerPage);
+// console.log("page", page);
 ---
-
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
@@ -49,23 +57,9 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
             </button>
           </div>
           <div id='blog-cards' class='flex flex-wrap gap-8 mb-20 relative z-10'>
-             {
-              filteredBlogData.slice(0, postsPerPage).map((post) => {
-                const file_path = post.file;
-                const parts = file_path?.split('/');
-
-                const last_part = parts[parts.length - 1];
-
-                const file_name = last_part.split('.')[0];
-                console.log('blogPostss', file_name);
-                return (
-                  <BlogCard
-                    frontmatter={post.frontmatter}
-                    url={`/blog/${file_name}`}
-                  />
-                );
-              })
-            }
+            {filteredBlogData.slice(0, postsPerPage).map((post) => (
+              <BlogCard frontmatter={post.frontmatter} url={post.url} />
+            ))}
           </div>
           <div class='flex justify-center items-center space-x-4 text-white pb-24'>
             <button
@@ -78,7 +72,7 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
             <div class='flex items-center space-x-2'>
               <div id='current-page'>1</div>
               <div>of</div>
-              <div id='total-pages'>{totalPages}</div>
+              <!-- <div id='total-pages'>{totalPages}</div> -->
             </div>
             <button
               id='next-page'
@@ -109,6 +103,13 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
           .map((post) => ({ ...post.data, slug: post.slug }));
 
         renderPosts(filteredBlogData);
+
+        // Assuming totalPages is calculated somewhere
+        const totalPages = calculateTotalPages(); // Replace with your actual logic
+
+        // Update the total pages displayed
+        const totalPagesElement = document.getElementById('total-pages');
+        totalPagesElement.textContent = totalPages.toString();
       }
 
       const formatViewCount = (view) => {

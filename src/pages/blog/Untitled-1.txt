@@ -1,12 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-import Navbar from '../../component/Navbar.astro';
-import BlogCard from '../../component/BlogCard.astro';
-import Footer from '../../component/Footer.astro';
-import AnimatedText from '../../component/AnimatedText.astro';
+import Navbar from '../../conponent/Navbar.astro';
+import BlogCard from '../../conponent/BlogCard.astro';
+import Footer from '../../conponent/Footer.astro';
+import AnimatedText from '../../conponent/AnimatedText.astro';
 import IconCollection from '../../IconCollection/IconCollection.astro';
 
-const blogPosts = await getCollection('blog');
+const blogPosts = await Astro.glob('../../content/blog/*.md');
+
 const postsPerPage = 6;
 let currentPage = 1;
 let filteredBlogData = blogPosts;
@@ -58,17 +58,21 @@ const totalPages = Math.ceil(blogPosts.length / postsPerPage);
           </div>
           <div id='blog-cards' class='flex flex-wrap gap-8 mb-20 relative z-10'>
             {
-              filteredBlogData
-                .slice(0, postsPerPage)
-                .map((post) => (
+              filteredBlogData.slice(0, postsPerPage).map((post) => {
+                const file_path = post.file;
+                const parts = file_path?.split('/');
+
+                const last_part = parts[parts.length - 1];
+
+                const file_name = last_part.split('.')[0];
+                console.log('blogPostss', file_name);
+                return (
                   <BlogCard
-                    title={post.data.title}
-                    description={post.data.description}
-                    views={post.data.views}
-                    pubTime={post.data.pubTime}
-                    href={`/blog/${post.slug}`}
+                    frontmatter={post.frontmatter}
+                    url={`/blog/${file_name}`}
                   />
-                ))
+                );
+              })
             }
           </div>
           <div
