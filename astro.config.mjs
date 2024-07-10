@@ -14,9 +14,7 @@ export default defineConfig({
   adapter: cloudflare({
     mode: 'directory',
   }),
-  experimental: {
-    assets: true,
-  },
+
   image: {
     service: {
       entrypoint: './src/image-service.ts',
