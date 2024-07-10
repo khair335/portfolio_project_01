@@ -16,8 +16,6 @@ export default defineConfig({
   }),
 
   image: {
-    service: {
-      entrypoint: './src/image-service.ts',
-    },
-  }
+   service: passthroughImageService(),
+ },
 });
