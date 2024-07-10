@@ -8,7 +8,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [tailwind(), mdx()],
    service: passthroughImageService(),
-  output: "server",
+  output: "hybrid",
   adapter: vercel(),
   adapter: netlify(),
   adapter: cloudflare({

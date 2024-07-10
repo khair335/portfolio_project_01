@@ -6,7 +6,7 @@ import Footer from '../../component/Footer.astro';
 import AnimatedText from '../../component/AnimatedText.astro';
 import IconCollection from '../../IconCollection/IconCollection.astro';
 import Pagination from '../../component/Pagination.astro';
-
+ export const prerender = false;
 const blogPosts = await getCollection('blog');
 
 
