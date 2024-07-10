@@ -8,9 +8,8 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [tailwind(), mdx()],
    service: squooshImageService(),
-  output: "server",
-  adapter: vercel(),
-  adapter: netlify(),
+  output: "hybrid",
+
   adapter: cloudflare({
     mode: 'directory', // Or 'advanced'
     compatibilityFlags: ['nodejs_compat']
