@@ -1,23 +1,20 @@
-import type { LocalImageService } from 'astro';
-import { baseService } from 'astro/assets';
+import type { LocalImageService } from "astro";
+import { baseService } from "astro/assets";
 
+// Image service ("sharp") not supported by Cloudflare pages
+// https://github.com/withastro/astro/issues/4109
 const service: LocalImageService = {
-    ...baseService,
-
-    async transform(inputBuffer, transform, serviceConfig) {
-        // Purposefully obfuscate the import to prevent bundling => will only work at build time!
-        const imageService = (
-            await new Function(
-                `return import('astro/assets/services/squoosh')`
-            )()
-        ).default;
-
-        return await imageService.transform(
-            inputBuffer,
-            transform,
-            serviceConfig
-        );
-    },
+  ...baseService,
+  getURL({ src }) {
+    const path = typeof src === "string" ? src : src.src;
+    return path;
+  },
+  async transform(buffer, transform) {
+    return {
+      data: buffer,
+      format: transform.format,
+    };
+  },
 };
 
 export default service;
