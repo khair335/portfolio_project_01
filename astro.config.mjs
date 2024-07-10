@@ -1,4 +1,4 @@
-import { defineConfig, squooshImageService, passthroughImageService } from 'astro/config';
+import { defineConfig, squooshImageService } from 'astro/config';
 import { imageService } from "@unpic/astro/service";
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
@@ -7,17 +7,12 @@ import netlify from "@astrojs/netlify/functions";
 import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [tailwind(), mdx()],
-
+   service: squooshImageService(),
   output: "server",
   adapter: vercel(),
   adapter: netlify(),
   adapter: cloudflare({
-    mode: 'directory',
+    mode: 'directory', // Or 'advanced'
+    compatibilityFlags: ['nodejs_compat']
   }),
-
-  image: {
-    service: {
-      entrypoint: './src/image-service.ts',
-    },
-  }
 });
